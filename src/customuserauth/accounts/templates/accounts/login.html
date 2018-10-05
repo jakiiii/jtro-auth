@@ -4,9 +4,21 @@
 {% block content %}
 <div class="container">
     <h1>Django Custom Auth Login</h1><hr/>
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+    <div class="" align="" style="margin-left: 14rem;">
+        <div class="card" style="width: 40rem; margin-top: 2rem;">
+            <div class="card-header text-left"><b>Login</b></div>
+            <div class="card-body">
+                <form method="post">{% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <button type="submit" class="btn btn-secondary btn-lg float-left btn-block">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- end of card body -->
+        </div><!-- end of card -->
+    </div>
 </div>
 {% endblock %}
