@@ -1,5 +1,6 @@
 {% url 'home' as home_url %}
 {% url 'login' as login_url %}
+{% url 'register' as register_url %}
 {% url 'logout' as logout_url %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,14 +20,14 @@
                 <a class="nav-link" href="{{ logout_url }}">Log Out</a>
             </li>
             {% else %}
-            <li class="nav-item dropdown {% if request.path == login_url %}active{% endif %}">
+            <li class="nav-item dropdown {% if request.path == login_url or request.path == register_url %}active{% endif %}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Accounts
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                     <a class="dropdown-item" href="{{ login_url }}">Login</a>
-                    <a class="dropdown-item" href="">Register</a>
+                    <a class="dropdown-item" href="{{ register_url }}">Register</a>
                 </div>
             </li>
             {% endif %}

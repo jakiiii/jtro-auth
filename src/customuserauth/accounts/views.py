@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages.views import SuccessMessageMixin, messages
 
@@ -23,6 +23,13 @@ class UserLoginView(FormView):
             messages.error(self.request, 'Username or Password is not valid!')
             return redirect('login')
         return super(UserLoginView, self).form_valid(form)
+
+
+class UserRegistrationView(CreateView, SuccessMessageMixin):
+    form_class = UserRegistrationForm
+    template_name = 'accounts/registration.html'
+    success_message = 'Registration successful.'
+    success_url = '/login/'
 
 
 def get_logout(request):
