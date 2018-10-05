@@ -1,5 +1,8 @@
+{% url 'home' as home_url %}
+{% url 'login' as login_url %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="">{% if brand_name %}{{ brand_name }}{% else %}jQurity User Auth{% endif %}</a>
+    <a class="navbar-brand" href="{{ home_url }}">{% if brand_name %}{{ brand_name }}{% else %}jQurity User Auth{% endif %}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-                <a class="nav-link" href="">Home</a>
+                <a class="nav-link" href="{{ home_url }}">Home</a>
             </li>
 
 
@@ -15,13 +18,13 @@
                 <a class="nav-link" href="">Log Out</a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {% if request.path == login_url %}active{% endif %}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Accounts
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="">Login</a>
+                    <a class="dropdown-item" href="{{ login_url }}">Login</a>
                     <a class="dropdown-item" href="">Register</a>
                 </div>
             </li>
