@@ -25,7 +25,7 @@ class UserLoginView(FormView):
         return super(UserLoginView, self).form_valid(form)
 
 
-class UserRegistrationView(CreateView, SuccessMessageMixin):
+class UserRegistrationView(SuccessMessageMixin, CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/registration.html'
     success_message = 'Registration successful.'
