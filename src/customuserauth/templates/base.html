@@ -1,16 +1,16 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
       <!-- css -->
       {% include 'base/css.html' %}
 
 
-    <title>{% block title %}jQurity{% endblock %}</title>
+      <title>{% block title %}jQurity{% endblock %}</title>
   </head>
   <body>
     {% include 'base/navbar.html' with brand_name='Custom User Auth' %}
@@ -18,7 +18,7 @@
     {% block content %}{% endblock %}
 
     <!-- JavaScript -->
-  {% include 'base/js.html' %}
+    {% include 'base/js.html' %}
 
   </body>
 </html>

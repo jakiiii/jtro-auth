@@ -1,5 +1,6 @@
 {% url 'home' as home_url %}
 {% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ home_url }}">{% if brand_name %}{{ brand_name }}{% else %}jQurity User Auth{% endif %}</a>
@@ -13,11 +14,11 @@
                 <a class="nav-link" href="{{ home_url }}">Home</a>
             </li>
 
-
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="">Log Out</a>
+                <a class="nav-link" href="{{ logout_url }}">Log Out</a>
             </li>
-
+            {% else %}
             <li class="nav-item dropdown {% if request.path == login_url %}active{% endif %}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Accounts
@@ -28,7 +29,7 @@
                     <a class="dropdown-item" href="">Register</a>
                 </div>
             </li>
-
+            {% endif %}
         </ul>
         <!-- search from -->
     </div>
