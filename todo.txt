@@ -12,3 +12,5 @@ Profile
 			- read info
 	Change Password
 	Reset Password
+
+If supper user is logout then user is not logout. Fixing this bug.
