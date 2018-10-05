@@ -1,0 +1,14 @@
+Set Email Activation with registration
+Bug fixing registration template
+
+Profile
+	Upload Image
+	User Information
+		User CRUD his own data
+		Like
+			- add info
+			- update info
+			- delete info
+			- read info
+	Change Password
+	Reset Password
