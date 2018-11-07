@@ -15,7 +15,9 @@
   <body>
     {% include 'base/navbar.html' with brand_name='Custom User Auth' %}
 
-    {% block content %}{% endblock %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
 
     <!-- JavaScript -->
     {% include 'base/js.html' %}

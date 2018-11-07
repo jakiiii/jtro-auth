@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
 {% block title %}Profile || {{ block.super }}{% endblock title %}
 
+
 {% block content %}
-<div class="container">
-    <h1>Profile</h1><hr/>
+<div>
+    <div class="py-4">
+        <div class="row">
+            <div class="col-9 col-md-9"></div>
+            <div class="col-3 col-md-3">
+                <div class="card">
+                    <div class="card-header">Profile Settings</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="" style="text-decoration: none;">About</a></li>
+                            <li class="list-group-item"><a href="" style="text-decoration: none;">Change Name</a></li>
+                            <li class="list-group-item"><a href="" style="text-decoration: none;">Change Password</a></li>
+                            <li class="list-group-item"><a href="" style="text-decoration: none;">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- end of col-3 -->
+        </div><!-- end of row -->
+    </div>
 </div>
 {% endblock %}

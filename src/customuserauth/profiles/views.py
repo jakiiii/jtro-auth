@@ -4,6 +4,5 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
-class ProfileTemplateView(LoginRequiredMixin, TemplateView):
-    login_url = '/login/'
+class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'

@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'home',
     'accounts',
-    'profiles',
+    'profiles'
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
