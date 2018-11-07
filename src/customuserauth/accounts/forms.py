@@ -47,7 +47,7 @@ class UserAdminChangeForm(forms.ModelForm):
             'last_name',
             'email',
             'password',
-            'active',
+            'is_active',
             'admin'
         )
 

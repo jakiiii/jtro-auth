@@ -10,6 +10,8 @@
             <div class="card-header text-left"><b>User Login</b></div>
             <div class="card-body">
                 {% include 'form.html' %}
+                <a href="{% url 'register' %}" class="float-left" style="text-decoration: none;">Create new account.</a>
+                <a href="{% url 'password_reset' %}" class="float-right" style="text-decoration: none;">Forger your password.</a>
             </div><!-- end of card body -->
         </div><!-- end of card -->
         <div class="col-6" style="margin-top: 2rem; margin-left: 6rem;">
