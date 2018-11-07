@@ -2,7 +2,6 @@
 This tutorial is codingforentrepreneurs by Justin
 https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
 """
-
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
