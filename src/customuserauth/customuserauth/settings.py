@@ -55,6 +55,12 @@ INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
 # Custom User Auth
 AUTH_USER_MODEL = 'accounts.User'
 
+# Login and Logout
+LOGIN_URL = '/account/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_URL_REDIRECT = '/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -24,12 +24,29 @@ class UserLoginView(FormView):
             return redirect('login')
         return super(UserLoginView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(UserLoginView, self).get_context_data(**kwargs)
+        context['title'] = 'Login'
+        return context
+
 
 class UserRegistrationView(SuccessMessageMixin, CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/registration.html'
     success_message = 'Registration successful.'
     success_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserRegistrationView, self).get_context_data(**kwargs)
+        context['title'] = 'Registration'
+        return context
+
+
+class PasswordChangeView(FormView):
+    def get_context_data(self, **kwargs):
+        context = super(PasswordChangeView, self).get_context_data(**kwargs)
+        context['title'] = 'Change Password'
+        return context
 
 
 def get_logout(request):
