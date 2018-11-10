@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
-from django.views.generic import FormView, CreateView
+from django.urls import reverse
+from django.views.generic import FormView, CreateView, View
 from django.contrib.auth import authenticate, login, logout
 from django.utils.http import is_safe_url
+from django.utils.safestring import mark_safe
 from django.contrib.messages.views import SuccessMessageMixin, messages
 
 from .forms import UserLoginForm, UserRegistrationForm
+from .models.email_activation import EmailActivation
 
 
 # Create your views here.
@@ -20,6 +23,7 @@ class UserLoginView(FormView):
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(self.request, email=email, password=password)
+        # user is self.request.user.is_authenticated
 
         if user is not None:
             if not user.is_active:
@@ -51,11 +55,35 @@ class UserRegistrationView(SuccessMessageMixin, CreateView):
         return context
 
 
-class PasswordChangeView(FormView):
-    def get_context_data(self, **kwargs):
-        context = super(PasswordChangeView, self).get_context_data(**kwargs)
-        context['title'] = 'Change Password'
-        return context
+class AccountEmailActivateView(View):
+    def get(self, request, key, *args, **kwargs):
+        qs = EmailActivation.objects.filter(key__iexact=key)
+        confirm_qs = qs.conformable()
+        if confirm_qs.count() == 1:
+            obj = confirm_qs.first()
+            obj.activate()
+            messages.success(self.request, "Your email has been confirmed. You can login now.")
+            return redirect('login')
+        else:
+            activated_qs = qs.filter(key__iexact=key, activated=True)
+            if activated_qs.exists():
+                reset_link = reverse('password_reset')
+                msg = """Your email has already confirmed!
+                Did you mean <a href="{link}">reset your password</a>?
+                """.format(link=reset_link)
+                messages.info(self.request, mark_safe(msg))
+                return redirect('login')
+        context = {
+        }
+        return render(self.request, 'registration/activation_error.html', context)
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(AccountEmailActivateView, self).get_context_data(**kwargs)
+    #     context['title'] = 'Resend Activation'
+    #     return context
 
 
 def get_logout(request):
