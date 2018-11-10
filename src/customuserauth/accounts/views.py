@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, CreateView
 from django.contrib.auth import authenticate, login, logout
+from django.utils.http import is_safe_url
 from django.contrib.messages.views import SuccessMessageMixin, messages
 
 from .forms import UserLoginForm, UserRegistrationForm
@@ -13,12 +14,20 @@ class UserLoginView(FormView):
     template_name = 'accounts/login.html'
 
     def form_valid(self, form):
+        next_ = self.request.GET.get('next')
+        next_post = self.request.POST.get('next')
+        redirect_path = next_ or next_post or None
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(self.request, email=email, password=password)
 
         if user is not None:
+            if not user.is_active:
+                messages.error(self.request, "This user is not active!")
+                return super(UserLoginView, self).form_valid(form)
             login(self.request, user)
+            if is_safe_url(redirect_path, self.request.get_host()):
+                return redirect(redirect_path)
         else:
             messages.error(self.request, 'Username or Password is not valid!')
             return redirect('login')
