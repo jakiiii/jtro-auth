@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.db import models
 from django.db.models.signals import pre_save, post_save
+from django.db.models import Q
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.utils import timezone
@@ -8,10 +11,37 @@ from django.conf import settings
 from .user_models import User
 from customuserauth.utils import unique_key_generator
 
+DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 3)
+
+
+# Create your queryset here.
+class EmailActivationQuerySet(models.query.QuerySet):
+    def conformable(self):
+        now = timezone.now()
+        start_range = now - timedelta(days=DEFAULT_ACTIVATION_DAYS)
+        end_range = now
+        return self.filter(
+            activated=False,
+            forced_expired=False
+        ).filter(
+            timestamp__gt=start_range,
+            timestamp__lte=end_range
+        )
+
 
 # Create your manager here.
 class EmailActivationManager(models.Manager):
-    pass
+    def get_queryset(self):
+        return EmailActivationQuerySet(self.model, using=self._db)
+
+    def conformable(self):
+        return self.get_queryset().conformable()
+
+    def email_exists(self, email):
+        return self.get_queryset().filter(
+            Q(email=email) |
+            Q(user_email=email)
+        ).filter(activated=False)
 
 
 # Create your model here.
@@ -29,6 +59,24 @@ class EmailActivation(models.Model):
 
     def __str__(self):
         return self.email
+
+    def can_activate(self):
+        qs = EmailActivation.objects.filter(pk=self.pk).conformable()
+        if qs.exists():
+            return True
+        return False
+
+    def activate(self):
+        if self.can_activate():
+            # it batter to write pre activation user signals
+            user = self.user
+            user.is_active = True
+            user.save()
+            # it batter to write post activation signals for user
+            self.activated = True
+            self.save()
+            return True
+        return False
 
     def regenerate(self):
         self.key = None

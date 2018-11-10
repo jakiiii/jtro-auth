@@ -42,7 +42,7 @@ class UserLoginView(FormView):
 class UserRegistrationView(SuccessMessageMixin, CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/registration.html'
-    success_message = 'Registration successful.'
+    success_message = 'Registration successful. We send activation instruction on your email.'
     success_url = '/account/login/'
 
     def get_context_data(self, **kwargs):
