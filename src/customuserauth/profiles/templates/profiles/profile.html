@@ -6,16 +6,17 @@
 <div>
     <div class="py-4">
         <div class="row">
-            <div class="col-9 col-md-9"></div>
+            <div class="col-9 col-md-9">
+                <h5>{{ object.first_name }} {{ object.last_name }}</h5>
+                <h5>{{ object.email }}</h5>
+            </div><!-- end of col-9 -->
             <div class="col-3 col-md-3">
                 <div class="card">
                     <div class="card-header">Profile Settings</div>
                     <div class="card-body">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="" style="text-decoration: none;">About</a></li>
-                            <li class="list-group-item"><a href="" style="text-decoration: none;">Change Name</a></li>
+                            <li class="list-group-item"><a href="{% url 'update-info' %}" style="text-decoration: none;">Change Name</a></li>
                             <li class="list-group-item"><a href="{% url 'password_change' %}" style="text-decoration: none;">Change Password</a></li>
-                            <li class="list-group-item"><a href="" style="text-decoration: none;">Contact</a></li>
                         </ul>
                     </div>
                 </div>

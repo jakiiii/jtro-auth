@@ -59,6 +59,18 @@ class UserAdminChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
+class UserInfoChangeForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=120, label='First Name', required=False)
+    last_name = forms.CharField(max_length=120, label='Last Name', required=False)
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+        ]
+
+
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=32)
     password = forms.CharField(widget=forms.PasswordInput)

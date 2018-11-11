@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} || {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="" align="" style="margin-left: 14rem;">
+        <div class="card" style="width: 40rem; margin-top: 2rem;">
+            <div class="card-header text-left">
+                <b>{{ title }}</b>
+                <span class="float-right">
+                    <a href="{% url 'profile' %}" style="text-decoration: none;">Back to Profile</a>
+                </span>
+            </div>
+            <div class="card-body">
+                {% include 'form.html' %}
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" disabled name="email" value="{{ request.user.email }}" class="form-control" />
+                        <small class="text-danger">you can not change primary email.</small>
+                    </div>
+                </div>
+            </div><!-- end of card body -->
+        </div><!-- end of card -->
+    </div>
+{% endblock %}
