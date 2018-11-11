@@ -3,6 +3,7 @@
 {% url 'register' as register_url %}
 {% url 'logout' as logout_url %}
 {% url 'profile' as profile_url %}
+{% url 'update-info' as settings %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ home_url }}">{% if brand_name %}{{ brand_name }}{% else %}jQurity User Auth{% endif %}</a>
@@ -23,7 +24,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ profile_url }}">Profile</a>
-                    <a class="dropdown-item" href="">Settings</a>
+                    <a class="dropdown-item" href="{{ settings }}">Settings</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
                 </div>
