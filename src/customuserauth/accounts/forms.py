@@ -3,8 +3,12 @@ This tutorial is codingforentrepreneurs by Justin
 https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
 """
 from django import forms
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+
+from .models.email_activation import EmailActivation
 
 User = get_user_model()
 
@@ -87,3 +91,17 @@ class UserRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class ReactivateEmailFrom(forms.Form):
+    email = forms.EmailField(max_length=32, label="Email", widget=forms.EmailInput(attrs={"class": "form-control"}))
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = EmailActivation.objects.email_exists(email)
+        if not qs.exists():
+            register_link = reverse('register')
+            msg = """This email does not exists or your account is suspend!.
+            Would you like to <a href={link}>register</a>?""".format(link=register_link)
+            raise forms.ValidationError(mark_safe(msg))
+        return email

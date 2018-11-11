@@ -41,7 +41,7 @@ class EmailActivationManager(models.Manager):
     def email_exists(self, email):
         return self.get_queryset().filter(
             Q(email=email) |
-            Q(user_email=email)
+            Q(user__email=email)
         ).filter(activated=False)
 
 
