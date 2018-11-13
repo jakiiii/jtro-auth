@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['.herokuapp.com']
 # SMTP GMAIL Settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'xequiation1234@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'CaptainPlanet01'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Jqurity | Custom User Auth (jqurity@gmail.com)'
