@@ -12,31 +12,34 @@ from .models.email_activation import EmailActivation
 
 
 # Create your views here.
-class UserLoginView(FormView):
-    form_class = UserLoginForm
-    success_url = '/profile/'
-    template_name = 'accounts/login.html'
+class RequestFormAttachMixin(object):
+    def get_form_kwargs(self):
+        kwargs = super(RequestFormAttachMixin, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
-    def form_valid(self, form):
+
+class NextUrlMixin(object):
+    default_next = '/'
+
+    def get_next_url(self):
         next_ = self.request.GET.get('next')
         next_post = self.request.POST.get('next')
         redirect_path = next_ or next_post or None
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
-        user = authenticate(self.request, email=email, password=password)
-        # user is self.request.user.is_authenticated
+        if is_safe_url(redirect_path, self.request.get_host()):
+            return redirect_path
+        return self.default_next
 
-        if user is not None:
-            if not user.is_active:
-                messages.error(self.request, "This user is not active!")
-                return super(UserLoginView, self).form_valid(form)
-            login(self.request, user)
-            if is_safe_url(redirect_path, self.request.get_host()):
-                return redirect(redirect_path)
-        else:
-            messages.error(self.request, 'Username or Password is not valid!')
-            return redirect('login')
-        return super(UserLoginView, self).form_valid(form)
+
+class UserLoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
+    form_class = UserLoginForm
+    success_url = '/profile/'
+    default_next = '/profile/'
+    template_name = 'accounts/login.html'
+
+    def form_valid(self, form):
+        next_path = self.get_next_url()
+        return redirect(next_path)
 
     def get_context_data(self, **kwargs):
         context = super(UserLoginView, self).get_context_data(**kwargs)

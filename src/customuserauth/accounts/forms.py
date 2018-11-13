@@ -3,12 +3,15 @@ This tutorial is codingforentrepreneurs by Justin
 https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
 """
 from django import forms
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.messages.views import messages
 
 from .models.email_activation import EmailActivation
+from .signals import user_logged_in
 
 User = get_user_model()
 
@@ -74,6 +77,40 @@ class UserInfoChangeForm(forms.ModelForm):
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=32)
     password = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        data = self.cleaned_data
+        email = data.get('email')
+        password = data.get('password')
+        qs = User.objects.filter(email=email)
+        if qs.exists():
+            # user email is registered, check email is active or email activation
+            not_active = qs.filter(is_active=False)
+            if not_active.exists():
+                # check email activation
+                confirm_email = EmailActivation.objects.filter(email=email)
+                is_conformable = confirm_email.conformable().exists()
+                if is_conformable:
+                    msg = messages.info(self.request, "Please check your email and confirm activation.")
+                    raise forms.ValidationError(msg)
+                email_confirm_exists = EmailActivation.objects.email_exists(email).exists()
+                if email_confirm_exists:
+                    msg = messages.info(self.request, "Please resend your conformation email.")
+                    raise forms.ValidationError(msg)
+                if not is_conformable and not email_confirm_exists:
+                    msg = messages.error(self.request, "This user is not active!")
+                    raise forms.ValidationError(msg)
+        user = authenticate(self.request, email=email, password=password)
+        if user is None:
+            msg = messages.error(self.request, "Invalid credentials.")
+            raise forms.ValidationError(msg)
+        login(self.request, user)
+        user_logged_in.send(user.__class__, instance=user, request=self.request)
+        return data
 
 
 class UserRegistrationForm(forms.ModelForm):
