@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 # SMTP GMAIL Settings
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'xequiation1234@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

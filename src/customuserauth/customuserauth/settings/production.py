@@ -26,11 +26,11 @@ SECRET_KEY = 'u#w(n+ipd)_r4_)gv4+4i3y_)moon*h8vlh#f2b+%+5=5z+mmt%%!h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 # SMTP GMAIL Settings
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'xequiation1234@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

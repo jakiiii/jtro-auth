@@ -1,0 +1,13 @@
+Custom
+    User Authentication -Done
+    Login               - Done
+    Registration        - Done
+
+Api Login
+    Facebook
+    Gmail
+    Git
+
+Multiple Department User
+    Login
+    Registration
