@@ -45,8 +45,8 @@ ADMINS = MANAGERS
 
 When you set your email than you have to change your gmail account sccourity.
 
-[Allow less secure apps](https://myaccount.google.com/lesssecureapps?pli=1)
-[Disable Captcha](https://accounts.google.com/displayunlockcaptcha)
+*[Allow less secure apps](https://myaccount.google.com/lesssecureapps?pli=1) and
+*[Disable Captcha](https://accounts.google.com/displayunlockcaptcha)
 
 >OR
 
@@ -55,7 +55,7 @@ Here have instructions how to create app password.
 
 [Sign in using App Passwords](https://support.google.com/accounts/answer/185833)
 
-After to go **main Templates** directory and you will see a registration folder. Copy or Cut that folder and set your project **main Template** folder.
+After to go **main Templates** directory and you will see a registration folder. Copy or Cut that folder and set your project in **main Template** folder.
 
 Than you have to migrate first than makemigration.
 ```
