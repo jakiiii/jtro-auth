@@ -56,7 +56,8 @@ Here have instructions how to create app password.
 [Sign in using App Passwords](https://support.google.com/accounts/answer/185833)
 
 Now go to your mail urls.py file and set accounts realated urls. Befoure you have to include method.
-`from django.urls import path, include`
+
+>`from django.urls import path, include`
 
 ```
 path('accounts/', RedirectView.as_view(url='/account')),
