@@ -45,8 +45,8 @@ ADMINS = MANAGERS
 
 When you set your email than you have to change your gmail account sccourity.
 
--[Allow less secure apps](https://myaccount.google.com/lesssecureapps?pli=1) and
--[Disable Captcha](https://accounts.google.com/displayunlockcaptcha)
+* [Allow less secure apps](https://myaccount.google.com/lesssecureapps?pli=1) and
+* [Disable Captcha](https://accounts.google.com/displayunlockcaptcha)
 
 >OR
 
