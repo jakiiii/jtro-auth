@@ -55,6 +55,15 @@ Here have instructions how to create app password.
 
 [Sign in using App Passwords](https://support.google.com/accounts/answer/185833)
 
+Now go to your mail urls.py file and set accounts realated urls. Befoure you have to include method.
+`from django.urls import path, include`
+
+```
+path('accounts/', RedirectView.as_view(url='/account')),
+path('account/', include('accounts.urls'), name='account'),
+path('accounts/', include('accounts.password.urls')),
+```
+
 After you have to go **main Templates** directory and you will see a registration folder. Copy or Cut that folder and set your project in **main Template** folder.
 
 Than you have to migrate first than makemigration.
