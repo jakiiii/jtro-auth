@@ -10,7 +10,7 @@ from django.utils import timezone
 
 from django.conf import settings
 from .user_models import User
-from customuserauth.utils import unique_key_generator
+from ..utils import unique_key_generator
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 3)
 
