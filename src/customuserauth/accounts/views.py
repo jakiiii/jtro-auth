@@ -37,6 +37,12 @@ class UserLoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     default_next = '/profile/'
     template_name = 'accounts/login.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('profile')
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         next_path = self.get_next_url()
         return redirect(next_path)
@@ -52,6 +58,12 @@ class UserRegistrationView(SuccessMessageMixin, CreateView):
     template_name = 'accounts/registration.html'
     success_message = 'Registration successful. We send activation instruction on your email.'
     success_url = '/account/login/'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('profile')
+        else:
+            return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(UserRegistrationView, self).get_context_data(**kwargs)
