@@ -59,6 +59,9 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
+    # is_student = models.BooleanField(default=False)
+    # is_teacher = models.BooleanField(default=False)
+    # is_management = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'

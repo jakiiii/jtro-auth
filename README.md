@@ -12,6 +12,7 @@
 09. Password Change
 10. Password Reset with email activation
 11. Custom QuerySet for Confirmable Activations
+12. You can easily create multiple users.
 
 ## SETUP Accounts App on Your Project.
 
@@ -74,6 +75,28 @@ python manage.py makemigrations
 python manage.py createsuperuser
 ```
 
-Its still development section. So you can find bug. And lot of feature will be add and fixed bug when we will find. Its an open source project. So any one can contribute it.
+## SETUP Profile App on Your Project.
 
-And I following *codingforentrepreneurs* tutorial for developing this project. Thnks for **Justin Mitchel**.
+You can easily setup user profile app. Here have two built in methods method where user can change his Name and Password. You can create an profile app or copy past few lines of code.
+
+Copy or cut profiles app [views.py](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/profiles) and set your project.
+
+Go your main *urls.py* file and setup profiles urls path.
+```
+    path('profiles/', RedirectView.as_view(url='/profile')),
+    path('profile/', include('profiles.urls'), name='profile'),
+```
+
+**Multiple User**
+You can easily create multiple user for your project. Go to User Model and set you users. Here few example.
+```
+class User(AbstractBaseUser):
+    ...
+    # is_student = models.BooleanField(default=False)
+    # is_teacher = models.BooleanField(default=False)
+    # is_management = models.BooleanField(default=False)
+```
+
+Process is done. Its a beta version. We will add more feature and fixing bug. It is an open source project. You can contribute this project or can share idea.
+
+And I'm following *codingforentrepreneurs* tutorial for developing this project. Thnks for **Justin Mitchel**.
