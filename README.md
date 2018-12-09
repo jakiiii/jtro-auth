@@ -79,7 +79,7 @@ python manage.py createsuperuser
 
 You can easily setup user profile app. Here have two built in methods method where user can change his Name and Password. You can create an profile app or copy past few lines of code.
 
-Copy or cut profiles app [views.py](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/profiles) and set your project.
+Copy or cut [profiles](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/profiles) app and set your project.
 
 Go your main *urls.py* file and setup profiles urls path.
 ```
