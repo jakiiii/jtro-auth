@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from django.contrib.messages import constants as messages
 
+# REST FRAMEWORK PERMISSION
+from customuserauth.restconf.main import *
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -58,6 +61,8 @@ INSTALLED_APPS = [
 
 THIRD_PARTY_APPS = [
     'widget_tweaks',
+    'rest_framework',
+    'rest_framework_jwt'
 ]
 
 LOCAL_APPS = [
