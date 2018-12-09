@@ -29,6 +29,7 @@ urlpatterns = [
     path('accounts/', include('accounts.password.urls')),
     path('profiles/', RedirectView.as_view(url='/profile')),
     path('profile/', include('profiles.urls'), name='profile'),
+    path('api/auth/', include('accounts.api.urls'))
 ]
 
 if settings.DEBUG:
