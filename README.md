@@ -75,7 +75,7 @@ python manage.py makemigrations
 python manage.py createsuperuser
 ```
 
-## SETUP Profile App on Your Project.
+## SETUP Profiles App on Your Project.
 
 You can easily setup user profile app. Here have two built in methods method where user can change his Name and Password. You can create an profile app or copy past few lines of code.
 
