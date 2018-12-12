@@ -1,6 +1,6 @@
 # Django Custom User Authentication (Django 2.1.3)
 
-## Function
+## Functions
 01. Customize Django Authentication
 02. Customize User Login
 03. Customize User Registration
@@ -13,6 +13,17 @@
 10. Password Reset with email activation
 11. Custom QuerySet for Confirmable Activations
 12. You can easily create multiple users.
+
+## REST API
+01. User API List & Details View
+02. Authentication & Permissions
+03. Implement JWT Authentication
+04. Custom JWT Response Payload Handler
+05. Login & Register API View
+06. Pagination
+07. Set Default Searching, Ordering & Filtering
+08. Permission Tests with Python Requests
+09. Rest API Unit Testing
 
 ## SETUP Accounts App on Your Project.
 
@@ -97,6 +108,43 @@ class User(AbstractBaseUser):
     # is_management = models.BooleanField(default=False)
 ```
 
+
+## SETUP Accounts REST API on Your Project.
+When you set [accounts](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/accounts) app in your project you must see [api](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/accounts/api) folder. If you do not create Rest API on your project than just delete this `api` folder otherwise you have to need this.
+
+Install django *djangorestframework* and *djangorestframework-jwt* module.
+
+```
+pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering support
+pip install djangorestframework-jwt
+```
+
+Go your *setting.py* and set those module,
+```
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'rest_framework_jwt'
+]
+```
+
+Now go to [customuserauth](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/customuserauth) app and you will see a folder **restconf**. Move set up on your project jsut like this. Now go to your *settings.py* file and past this line.
+
+```
+# REST FRAMEWORK PERMISSION
+from customuserauth.restconf.main import *
+```
+
+Open your mail *urls.py* file and add api app path,
+```
+urlpatterns = [
+    ath('api/auth/', include('accounts.api.urls')),
+    path('api/user/', include('accounts.api.user.urls'))
+]
+```
+
 Process is done. Its a beta version. We will add more feature and fixing bug. It is an open source project. You can contribute this project or can share idea.
 
-And I'm following *codingforentrepreneurs* tutorial for developing this project. Thnks for **Justin Mitchel**.
+And We are following *codingforentrepreneurs* tutorial for developing this project. Thnks for **Justin Mitchel**.
