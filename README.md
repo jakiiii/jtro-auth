@@ -130,7 +130,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Now go to [customuserauth](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/customuserauth) app and you will see a folder **restconf**. Move set up on your project jsut like this. Now go to your *settings.py* file and past this line.
+Now go to [customuserauth](https://github.com/jakiiii/django-custom-user-auth/tree/master/src/customuserauth/customuserauth) app and you will see a folder **restconf**. Move and set up on your project just like this. Now go to your *settings.py* file and past this line.
 
 ```
 # REST FRAMEWORK PERMISSION
