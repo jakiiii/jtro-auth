@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
+from rest_framework.reverse import reverse as api_reverse
 
 User = get_user_model()
 
 
 class UserListSerializer(serializers.ModelSerializer):
     uri = serializers.SerializerMethodField(read_only=True)
+    user_uri = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -16,10 +18,14 @@ class UserListSerializer(serializers.ModelSerializer):
             'last_name',
             'email',
             'uri',
+            'user_uri',
         ]
 
     def get_uri(self, obj):
-        return "/api/users/{id}/".format(id=obj.id)
+        return api_reverse("api-user-list", request=self.context.get('request'))
+
+    def get_user_uri(self, obj):
+        return api_reverse("api-user-detail", kwargs={"id": obj.id}, request=self.context.get('request'))
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -36,7 +42,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_uri(self, obj):
-        return "/api/users/{id}/".format(id=obj.id)
+        return api_reverse("api-user-detail", kwargs={"id": obj.id}, request=self.context.get('request'))
 
 
 class UserPublicDisplaySerializer(serializers.ModelSerializer):
@@ -53,4 +59,4 @@ class UserPublicDisplaySerializer(serializers.ModelSerializer):
         ]
 
     def get_uri(self, obj):
-        return "/api/users/{id}/".format(id=obj.id)
+        return api_reverse("api-user-detail", kwargs={"id": obj.id}, request=self.context.get('request'))
