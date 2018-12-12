@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import generics, permissions
 
-from .serializers import UserDetailSerializer
+from .serializers import UserListSerializer, UserDetailSerializer
 
 User = get_user_model()
 
@@ -13,5 +13,8 @@ class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.filter(is_active=True)
     lookup_field = 'id'  # slug -> username
 
-    # def get_serializer_context(self):
-    #     return {'request': self.request}
+
+class UserListAPIView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = UserListSerializer
+    queryset = User.objects.filter(is_active=True)

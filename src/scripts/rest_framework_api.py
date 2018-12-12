@@ -3,7 +3,7 @@ import json
 import requests
 
 #######################################
-# AUTH REGISTER REQUESTS TEXT
+# AUTH REGISTER REQUESTS TEST
 ######################################
 
 AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
@@ -27,7 +27,7 @@ token = r.json()  # ['token']
 print(token)
 
 #######################################
-# AUTH LOGIN REQUESTS TEXT
+# AUTH LOGIN REQUESTS TEST
 ######################################
 
 # AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
