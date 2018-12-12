@@ -17,9 +17,9 @@ headers = {
 data = {
     "first_name": 'First Name',
     "last_name": 'Last Name',
-    "email": 'mohin.nr@gmail.com',
-    "password": 'SADHIN101119',
-    "password2": 'SADHIN101119',
+    "email": 'test@mail.com',
+    "password": 'password123',
+    "password2": 'password123',
 }
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
@@ -39,8 +39,8 @@ print(token)
 # }
 #
 # data = {
-#     "username": 'jaki@jqurity.com',
-#     "password": 'SADHIN101119',
+#     "username": '',
+#     "password": '',
 # }
 #
 # r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)

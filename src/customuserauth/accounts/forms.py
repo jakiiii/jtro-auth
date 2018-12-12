@@ -1,7 +1,3 @@
-"""
-This tutorial is codingforentrepreneurs by Justin
-https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
-"""
 from django import forms
 from django.shortcuts import redirect
 from django.urls import reverse

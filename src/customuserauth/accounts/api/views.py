@@ -21,9 +21,9 @@ class AuthAPIView(APIView):
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return Response({'detail': 'You are already authenticated'}, status=400)
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
-        qs = User.objects.filter(email__iexact=username).distinct()
+        qs = User.objects.filter(email__iexact=email).distinct()
         if qs.count() == 1:
             user_obj = qs.first()
             if user_obj.check_password(password):
