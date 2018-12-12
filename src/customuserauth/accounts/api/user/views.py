@@ -18,3 +18,5 @@ class UserListAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = UserListSerializer
     queryset = User.objects.filter(is_active=True)
+    search_fields = ['id', 'email', 'first_name', 'last_name']
+    ordering_fields = ['id', 'email', 'timestamp']
