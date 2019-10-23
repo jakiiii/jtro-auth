@@ -1,4 +1,4 @@
-# Django Custom User Authentication (Django 2.1.3)
+# Django Custom User Authentication (Django 2.x)
 
 ## Functions
 01. Customize Django Authentication
