@@ -19,7 +19,7 @@ jeepney==0.4
 keyring==10.6.0
 keyrings.alt==3.0
 Markdown==3.0.1
-psutil==5.4.2
+psutil==5.6.6
 psycopg2==2.7.6.1
 psycopg2-binary==2.7.6.1
 pycparser==2.19
