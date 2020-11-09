@@ -20,6 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.views.generic import RedirectView
+from rest_framework_jwt.views import obtain_jwt_token
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +32,7 @@ urlpatterns = [
     path('profiles/', RedirectView.as_view(url='/profile')),
     path('profile/', include('profiles.urls'), name='profile'),
 
+    path('api-token-auth/', obtain_jwt_token),
     path('api/auth/', include('accounts.api.urls')),
     path('api/user/', include('accounts.api.user.urls'))
 ]

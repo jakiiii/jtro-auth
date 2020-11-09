@@ -139,12 +139,16 @@ from customuserauth.restconf.main import *
 
 Open your mail *urls.py* file and add api app path,
 ```
+from rest_framework_jwt.views import obtain_jwt_token
+
+
 urlpatterns = [
-    ath('api/auth/', include('accounts.api.urls')),
+    path('api-token-auth/', obtain_jwt_token),
+    path('api/auth/', include('accounts.api.urls')),
     path('api/user/', include('accounts.api.user.urls'))
 ]
 ```
 
 Process is done. Its a beta version. We will add more feature and fixing bug. It is an open source project. You can contribute this project or can share idea.
 
-And We are following *codingforentrepreneurs* tutorial for developing this project. Thnks for **Justin Mitchel**.
+And We are following *codingforentrepreneurs* tutorial for developing this project. A Big Thanks for **Justin Mitchel**.
