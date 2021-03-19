@@ -9,7 +9,7 @@ Django==2.2
 django-crispy-forms==1.9.2
 django-filter==2.3.0
 django-widget-tweaks==1.4.8
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 dnspython==2.0.0
 enum34==1.1.10
